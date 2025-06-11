@@ -1,8 +1,9 @@
+import React from 'react'
 
-export default function Home() {
+const page = () => {
   return (
-    <div>
-    Welcome to Next app
-    </div>
-  );
+    <div className='w-full h-screen flex justify-center items-center'>page</div>
+  )
 }
+
+export default page
