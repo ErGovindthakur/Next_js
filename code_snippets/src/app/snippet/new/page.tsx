@@ -5,11 +5,10 @@ import { Textarea } from '@/components/ui/textarea'
 import { prisma } from '@/lib/prisma'
 import { redirect } from 'next/navigation'
 import React from 'react'
-
+// import toast from 'react-hot-toast'
 const NewPage = () => {
 
-  // ❌ MISTAKE: 'FromData' is a typo; should be 'FormData' (built-in type)
-  // ✅ FIX:
+
   const createSnippet = async (formData: FormData) => {
     'use server' // ✅ Correct use of 'use server' directive for server action
 
@@ -28,6 +27,7 @@ const NewPage = () => {
 
     console.log(`created snippet -: ${snippet.code}`);
 
+    // toast.success("Code snippet created...");
     redirect("/");
   };
 
