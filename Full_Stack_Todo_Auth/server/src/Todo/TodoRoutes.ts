@@ -1,5 +1,10 @@
 import express, { NextFunction, Request, Response } from "express";
-import { createTodo, deleteTodo, updateTodo } from "./TodoController";
+import {
+  createTodo,
+  deleteTodo,
+  getAllTodo,
+  updateTodo,
+} from "./TodoController";
 
 const todoRouter = express.Router();
 
@@ -18,10 +23,16 @@ todoRouter.delete(
   deleteTodo as (req: Request, res: Response, next: NextFunction) => void
 );
 
+todoRouter.get(
+  "/",
+  getAllTodo as (req: Request, res: Response, next: NextFunction) => void
+);
+
 export default todoRouter;
 
 /*
 createTodo => http://localhost:5000/api/todo/createTodo (post)
 updateTodo => http://localhost:5000/api/todo/updateTodo/id (put)
 deleteTodo => http://localhost:5000/api/todo/deleteTodo/id (delete)
+getAllTodo => http://localhost:5000/api/todo (get)
 */
