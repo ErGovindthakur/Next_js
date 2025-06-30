@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
-import { createTodo } from "./TodoController";
+import { createTodo, updateTodo } from "./TodoController";
 
 const todoRouter = express.Router();
 
@@ -8,4 +8,14 @@ todoRouter.post(
   createTodo as (req: Request, res: Response, next: NextFunction) => void
 );
 
-export default todoRouter
+todoRouter.put(
+  "/updateTodo/:id",
+  updateTodo as (req: Request, res: Response, next: NextFunction) => void
+);
+
+export default todoRouter;
+
+/*
+createTodo => http://localhost:5000/api/todo/createTodo (post)
+updateTodo => http://localhost:5000/api/todo/updateTodo/id (put)
+*/
