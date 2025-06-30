@@ -2,7 +2,9 @@
 
 import { Request, Response, NextFunction } from "express";
 import TodoModel from "./TodoModel";
+import { error } from "console";
 
+// 1. Create Todo
 export const createTodo = async (
   req: Request,
   res: Response,
@@ -36,6 +38,7 @@ export const createTodo = async (
   }
 };
 
+// 2. Update Todo
 export const updateTodo = async (
   req: Request,
   res: Response,
@@ -77,30 +80,60 @@ export const updateTodo = async (
   }
 };
 
+// 3. Delete Todo
 export const deleteTodo = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-     const {id} = req.params;
+  const { id } = req.params;
   try {
-     const deletedTodo = await TodoModel.findByIdAndDelete(id);
+    const deletedTodo = await TodoModel.findByIdAndDelete(id);
 
-     if(!deletedTodo){
-          return res.status(404).json({
-               success:false,
-               message:"Todo not found"
-          })
-     }
+    if (!deletedTodo) {
+      return res.status(404).json({
+        success: false,
+        message: "Todo not found",
+      });
+    }
 
-     res.status(200).json({
-          success:true,
-          message:"Todo deleted successfully"
-     })
+    res.status(200).json({
+      success: true,
+      message: "Todo deleted successfully",
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
       message: error instanceof Error ? error.message : "Failed to update todo",
+    });
+  }
+};
+
+// 4. GetAll Todo
+export const getAllTodo = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const allTodo = await TodoModel.find();
+
+    if (!allTodo) {
+      return res.status(404).json({
+        success: false,
+        message: "To Not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "All todos are here",
+      todos: allTodo,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err instanceof Error ? err.message : "No other todo",
     });
   }
 };
