@@ -76,3 +76,31 @@ export const updateTodo = async (
     });
   }
 };
+
+export const deleteTodo = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+     const {id} = req.params;
+  try {
+     const deletedTodo = await TodoModel.findByIdAndDelete(id);
+
+     if(!deletedTodo){
+          return res.status(404).json({
+               success:false,
+               message:"Todo not found"
+          })
+     }
+
+     res.status(200).json({
+          success:true,
+          message:"Todo deleted successfully"
+     })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error instanceof Error ? error.message : "Failed to update todo",
+    });
+  }
+};
