@@ -36,18 +36,43 @@ export const createTodo = async (
   }
 };
 
-export const updateTodo = async(req: Request, res: Response, next: NextFunction) => {
-     const {id} = req.params;
-     const {todoTitle,todoTask} = req.body;
+export const updateTodo = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { id } = req.params;
+  let { todoTitle, todoTask } = req.body;
 
   try {
-     const todo = await TodoModel.findByIdAndUpdate(id,)
+    // Addition things => create empty obj and initialize with two props
+    const updateTodoField: Partial<{ todoTile: string; todoTask: string }> = {};
 
+    if (todoTitle !== undefined) updateTodoField.todoTile = todoTitle;
+    if (todoTask !== undefined) updateTodoField.todoTask = todoTask;
 
+    const updatedTodo = await TodoModel.findByIdAndUpdate(id, updateTodoField, {
+      new: true,
+    });
+
+    if (!updatedTodo) {
+      return res.status(404).json({
+        success: false,
+        message: "Todo not found",
+      });
+    }
+
+    await updatedTodo.save();
+
+    res.status(201).json({
+      success: true,
+      message: "Todo Updated",
+      todo: updatedTodo,
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error,
+      message: error instanceof Error ? error.message : "Failed to update todo",
     });
   }
 };
