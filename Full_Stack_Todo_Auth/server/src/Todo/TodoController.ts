@@ -2,7 +2,7 @@
 
 import { Request, Response, NextFunction } from "express";
 import TodoModel from "./TodoModel";
-import { error } from "console";
+// import { error } from "console";
 
 // 1. Create Todo
 export const createTodo = async (
