@@ -49,9 +49,9 @@ export const updateTodo = async (
 
   try {
     // Addition things => create empty obj and initialize with two props
-    const updateTodoField: Partial<{ todoTile: string; todoTask: string }> = {};
+    const updateTodoField: Partial<{ todoTitle: string; todoTask: string }> = {};
 
-    if (todoTitle !== undefined) updateTodoField.todoTile = todoTitle;
+    if (todoTitle !== undefined) updateTodoField.todoTitle = todoTitle;
     if (todoTask !== undefined) updateTodoField.todoTask = todoTask;
 
     const updatedTodo = await TodoModel.findByIdAndUpdate(id, updateTodoField, {

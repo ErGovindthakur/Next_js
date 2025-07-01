@@ -77,3 +77,42 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.todo-from-container{
+  width: 270px;
+  height: 250px;
+  border-radius: 34px;
+  background: #000;
+  padding: 9px 9px;
+  position: absolute;
+  top: 25%;
+  left: 35%;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+}
+.todo-para{
+  font-style:normal;
+}
+.form{
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  padding: 3px 6px;
+  flex-direction: column;
+}
+.update{
+  background-color: blue;
+  color: white;
+  padding: 10px 40px;
+}
+.cancel{
+  background-color: rgb(184, 8, 8);
+  color: white;
+  padding: 10px 40px;
+}
+.btn-container{
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+}
