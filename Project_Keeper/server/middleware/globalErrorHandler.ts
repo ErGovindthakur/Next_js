@@ -7,10 +7,10 @@ export const globalErrorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  const statusCode = err.statusCode || 5000;
+  const statusCode = err.status || 500;
 
   res.status(statusCode).json({
      message:err.message,
-     errorStack:err.stack
+     errorStack:process.env.NODE_ENV === "development" ? err.stack : ""
   })
 };
