@@ -11,6 +11,6 @@ export const globalErrorHandler = (
 
   res.status(statusCode).json({
      message:err.message,
-     errorStack:process.env.NODE_ENV === "development" ? err.stack : ""
+     errorStack:process.env.ENV === "development" ? err.stack : ""
   })
 };
