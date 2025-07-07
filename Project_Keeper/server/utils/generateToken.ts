@@ -10,7 +10,7 @@ export const generateToken = (res: Response, userId: string) => {
   // set token into cookie
   res.cookie("jwt",token,{
      httpOnly:true, // prevent js violation
-     secure:process.env.NODE_ENV === "production",
+     secure:process.env.ENV === "production",
      sameSite:"strict",
      maxAge:7*24*60*60*1000
   })
