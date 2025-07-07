@@ -25,4 +25,4 @@ const projectSchema = new mongoose.Schema<ProjectUser>({
      timestamps:true
 })
 
-const ProjectModel = mongoose.model<ProjectUser>("Project",projectSchema)
+export const userModel = mongoose.model<ProjectUser>("Project",projectSchema)
